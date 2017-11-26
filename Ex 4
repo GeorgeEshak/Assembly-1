@@ -12,8 +12,12 @@ INCLUDE io.h
 	dol BYTE  "enter number of dollar  ",0
 	x  DWORD ?
 	y  DWORD ?
+	count DWORD ?
+	sum BYTE "The total number of coins are ",0
+	result2 BYTE 11 DUP (?) ,0
 	string BYTE 30 DUP(?)
 
+	
     result1 BYTE "The toatal you enter is "
 	dollar BYTE 11 DUP(?)
 	   BYTE "  Dollar and "
@@ -25,13 +29,18 @@ INCLUDE io.h
 
 .CODE
 MainProc PROC 
+
+	mov count,0
+
 	input p,string,30
 	atod string 
 	mov x,eax
+	add count,eax
 
 	input n,string,30
 	atod string
 	mov y,eax
+	add count,eax
 	mov eax,5
 	mul y
 	add x,eax
@@ -39,6 +48,7 @@ MainProc PROC
 	input d,string,30
 	atod string
 	mov y,eax
+	add count,eax
 	mov eax,10
 	mul y
 	add x,eax
@@ -46,6 +56,7 @@ MainProc PROC
 	input q,string,30
 	atod string
 	mov y,eax
+	add count,eax
 	mov eax,25
 	mul y
 	add x,eax
@@ -53,6 +64,7 @@ MainProc PROC
 	input f,string,30
 	atod string
 	mov y,eax
+	add count,eax
 	mov eax,50
 	mul y
 	add x,eax
@@ -60,6 +72,7 @@ MainProc PROC
 	input dol,string,30
 	atod string
 	mov y,eax
+	add count,eax
 	mov eax,100
 	mul y
 	add eax,x
@@ -70,6 +83,9 @@ MainProc PROC
 	dtoa pennies,edx
 	dtoa dollar,eax
 	output result,result1
+
+	dtoa result2,count
+	output sum,result2
 	
 
 	mov eax,0 
